@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>DICE GAME</title>
+        <link rel = "stylesheet" href = "Dicechallenge.css" >
+    </head>
+    <body>
+        <h1 id = "h1">Refresh me!</h1>
+        <div class = "initialization">
+            <div class ="dice1">
+                <p class = "user1">User 1</p>
+                <img class = "img1" src = "Dice images\images\dice6.png" alt = "ERROR!! No image display">
+            </div>
+            <div class = "dice2">
+                <p class = "user2">User 2</p>
+                <img class = "img2" src = "Dice images\images\dice6.png" alt = "ERROR!! No image display">
+            </div>
+        </div>
+    <div class = "buttons">
+            <button type = "button" class = "button" onclick=" Rolldice() ">Roll the dice</button>
+            <button type = "button" class = "button" onClick="editnames()">Edit names</button>
+            <button type = "button" class = "button" onClick="Auto()">Auto rolling</button>
+            <button type = "button" class = "button" onClick="Manual()">Manual rolling</button>
+        </div>
+        <script>
+            var user_1 = "user 1" ;
+            var user_2 = "user 2" ;
+
+//To change the names
+function editnames()
+{
+    user_1 = prompt("Enter player1 name");
+    user_2 = prompt("Enter player2 name");
+
+    document.querySelector(".user1").innerHTML = user_1;
+    document.querySelector(".user2").innerHTML = user_2;
+}
+function Rolldice()
+{
+    var rollno1 = Math.floor((Math.random()*6)+1);
+    var rollno2 = Math.floor((Math.random()*6)+1);
+    document.querySelector(".dice1 .img1").setAttribute("src" ,"dice"+rollno1+".png") ;
+    document.querySelector(".dice2 .img2").setAttribute("src" ,"dice"+rollno2+".png") ;
+    //var image1 = document.querySelectorAll("img")[0].setAttribute("src" ,"C:\Users\vishn\OneDrive\Desktop\Web development\DOM\Dice images\Dice"+ rollno1 +".png");
+    //document.querySelectorAll("img")[1].setAttribute("src" ,"C:\Users\vishn\OneDrive\Desktop\Web development\DOM\Dice images\Dice"+ rollno2 +".png");
+    document.querySelectorAll("img")[0].setAttribute("alt" , "OOPS!! DICE IMAGE IS NOT DISPLAYED."+user_1+" got the number "+rollno1);
+    document.querySelectorAll("img")[1].setAttribute("alt" , "OOPS!! DICE IMAGE IS NOT DISPLAYED."+user_2+" got the number "+rollno2);
+    if ( rollno1 === rollno2 )
+    {
+        document.querySelector("#h1").innerHTML = "DRAW!!";
+    }
+    else if (rollno1 > rollno2)
+    {
+        document.querySelector("#h1").innerHTML = ( user_1 + " WINS!!") ;
+    }
+    else{
+        document.querySelector("#h1").innerHTML = ( user_2 + " WINS!!") ;
+    }
+}
+function Auto()
+{
+    timer = setInterval(Rolldice , 2500);
+}
+function Manual()
+{
+    clearTimeout(timer);
+}
+       
+       </script>
+    </body>
+    <footer>copyright @Vishnu A</footer>
+</html>
